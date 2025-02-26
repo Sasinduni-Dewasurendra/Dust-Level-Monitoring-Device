@@ -1,0 +1,658 @@
+[
+    {
+        "id": "7ab06ad3559c0b91",
+        "type": "tab",
+        "label": "Dust Level Monitoring Device",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "e2c8afa54e3e80cc",
+        "type": "ui_led",
+        "z": "7ab06ad3559c0b91",
+        "order": 3,
+        "group": "35a79c7f1a872629",
+        "width": 2,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "2",
+                "valueType": "num"
+            },
+            {
+                "color": "#f2a20d",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 730,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "7ae9d7ec227e1fa6",
+        "type": "mqtt in",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "topic": "dust sensor",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "3a135a3a22d38407",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "bee50fc7959cd372",
+                "6e5a2ebe0dd12df1",
+                "b3c3c18958f6317a"
+            ]
+        ]
+    },
+    {
+        "id": "bee50fc7959cd372",
+        "type": "ui_gauge",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "group": "35a79c7f1a872629",
+        "order": 2,
+        "width": 6,
+        "height": 6,
+        "gtype": "donut",
+        "title": "",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "400000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 490,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6e5a2ebe0dd12df1",
+        "type": "function",
+        "z": "7ab06ad3559c0b91",
+        "name": "function 61",
+        "func": "if  (msg.payload<50000){\n    \n    msg.payload = 0;\n}else if(msg.payload>=50000&&msg.payload<100800){\n    msg.payload = 1\n}\nelse{\n    msg.payload = 2;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 120,
+        "wires": [
+            [
+                "e2c8afa54e3e80cc"
+            ]
+        ]
+    },
+    {
+        "id": "a53957c23416881b",
+        "type": "ui_text",
+        "z": "7ab06ad3559c0b91",
+        "group": "35a79c7f1a872629",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Dust Level :",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 750,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "66b18a718ad26ed9",
+        "type": "ui_led",
+        "z": "7ab06ad3559c0b91",
+        "order": 4,
+        "group": "ed6fb1914b666158",
+        "width": 3,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "2",
+                "valueType": "num"
+            },
+            {
+                "color": "#f2a20d",
+                "value": "1",
+                "valueType": "num"
+            },
+            {
+                "color": "#008000",
+                "value": "0",
+                "valueType": "num"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 490,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1e8d9ce62d88908f",
+        "type": "ui_gauge",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "group": "ed6fb1914b666158",
+        "order": 3,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "LDR value 1",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "4095",
+        "colors": [
+            "#bf3000",
+            "#e6e600",
+            "#0db71a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "0c47f963ea157e78",
+        "type": "ui_text",
+        "z": "7ab06ad3559c0b91",
+        "group": "ed6fb1914b666158",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Dust Level :",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 790,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b3c3c18958f6317a",
+        "type": "function",
+        "z": "7ab06ad3559c0b91",
+        "name": "function 63",
+        "func": "const payload = msg.payload;\n\n  if (payload < 22500) {\n    msg.payload = \"Clean Air\";\n  } else if (payload >= 22500 && msg.payload < 100800) {\n    msg.payload = \"Medium Dust Level\";\n  } else if (payload >= 100800 && msg.payload <400000) {\n    msg.payload = \"High Dust Level\";\n  } else {\n    msg.payload = \"Value outside dust level range\";\n  }\n\n  return msg; // No need to modify this line",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 80,
+        "wires": [
+            [
+                "a53957c23416881b"
+            ]
+        ]
+    },
+    {
+        "id": "1ca9cc6b7e7f85de",
+        "type": "mqtt in",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "topic": "ldr_sensor_output",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "3a135a3a22d38407",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "66b18a718ad26ed9",
+                "db08c68856e277a4"
+            ]
+        ]
+    },
+    {
+        "id": "db08c68856e277a4",
+        "type": "function",
+        "z": "7ab06ad3559c0b91",
+        "name": "function 64",
+        "func": "const payload = msg.payload;\n\n  if (payload == 0) {\n    msg.payload = \"Clean Surface\";\n  } else if (payload == 1) {\n    msg.payload = \"Medium Dust Level\";\n  } else if (payload == 2) {\n    msg.payload = \"High Dust Level\";\n  } else {\n    msg.payload = \"Value outside dust level range\";\n  }\n\n  return msg; // No need to modify this line",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "0c47f963ea157e78"
+            ]
+        ]
+    },
+    {
+        "id": "30420f50e9ff0d1f",
+        "type": "mqtt in",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "topic": "ldr_sensor3",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "3a135a3a22d38407",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 560,
+        "wires": [
+            [
+                "99a96547907b66d5"
+            ]
+        ]
+    },
+    {
+        "id": "7c032caddc3d881d",
+        "type": "mqtt in",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "topic": "ldr_sensor2",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "3a135a3a22d38407",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 500,
+        "wires": [
+            [
+                "d5304aef290547d5"
+            ]
+        ]
+    },
+    {
+        "id": "0f164092bcdbb0f5",
+        "type": "mqtt in",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "topic": "ldr_sensor1",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "3a135a3a22d38407",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 440,
+        "wires": [
+            [
+                "1e8d9ce62d88908f"
+            ]
+        ]
+    },
+    {
+        "id": "99a96547907b66d5",
+        "type": "ui_gauge",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "group": "ed6fb1914b666158",
+        "order": 6,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "LDR value 3",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "4095",
+        "colors": [
+            "#bf3000",
+            "#e6e600",
+            "#0db71a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d5304aef290547d5",
+        "type": "ui_gauge",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "group": "ed6fb1914b666158",
+        "order": 7,
+        "width": 3,
+        "height": 3,
+        "gtype": "gage",
+        "title": "LDR value 2",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "4095",
+        "colors": [
+            "#bf3000",
+            "#e6e600",
+            "#0db71a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5da0bbe58a0a10a4",
+        "type": "mqtt in",
+        "z": "7ab06ad3559c0b91",
+        "name": "",
+        "topic": "text",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "3a135a3a22d38407",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "50dac8ef7a498f7c"
+            ]
+        ]
+    },
+    {
+        "id": "50dac8ef7a498f7c",
+        "type": "ui_text",
+        "z": "7ab06ad3559c0b91",
+        "group": "ed6fb1914b666158",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Panel state :",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "x": 510,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4374b2ccc2c1aa30",
+        "type": "scheduler",
+        "z": "7ab06ad3559c0b91",
+        "outtopic": "",
+        "outpayload1": "Enabled",
+        "outpayload2": "Disabled",
+        "name": "My Scheduler",
+        "lat": "8.3",
+        "lon": "80.3",
+        "start": "sunrise",
+        "end": "sunset",
+        "starttime": "600",
+        "endtime": "1080",
+        "duskoff": "0",
+        "dawnoff": "0",
+        "outtext1": "",
+        "outtext2": "",
+        "sun": true,
+        "mon": true,
+        "tue": true,
+        "wed": true,
+        "thu": true,
+        "fri": true,
+        "sat": true,
+        "jan": true,
+        "feb": true,
+        "mar": true,
+        "apr": true,
+        "may": true,
+        "jun": true,
+        "jul": true,
+        "aug": true,
+        "sep": true,
+        "oct": true,
+        "nov": true,
+        "dec": true,
+        "repeat": false,
+        "atstart": true,
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "575b6d35f6dec50d"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "575b6d35f6dec50d",
+        "type": "function",
+        "z": "7ab06ad3559c0b91",
+        "name": "function 65",
+        "func": "function controlDashboard(msg) {\n  // Check the message payload from the Schedule node\n  if (msg.payload === \"on\") {\n    // Dashboard enabled, set a global variable or send a message to \n    // your dashboard control logic (replace with your implementation)\n    global.set('dashboardEnabled', true);\n  } else {\n    // Dashboard disabled, set a global variable or send a message (replace)\n    global.set('dashboardEnabled', false);\n  }\n  return msg;\n}\n\n// Call the function and return the message\nreturn controlDashboard(msg);\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 320,
+        "wires": [
+            [
+                "4cf79070aab1989f"
+            ]
+        ]
+    },
+    {
+        "id": "4cf79070aab1989f",
+        "type": "ui_text",
+        "z": "7ab06ad3559c0b91",
+        "group": "9916bb3f941e7ac5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Device : ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 640,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "fd68858da5a565a6",
+        "type": "ui_spacer",
+        "z": "7ab06ad3559c0b91",
+        "name": "spacer",
+        "group": "35a79c7f1a872629",
+        "order": 4,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "92006f73c369a354",
+        "type": "ui_spacer",
+        "z": "7ab06ad3559c0b91",
+        "name": "spacer",
+        "group": "35a79c7f1a872629",
+        "order": 5,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "af01be08267e52f5",
+        "type": "ui_spacer",
+        "z": "7ab06ad3559c0b91",
+        "name": "spacer",
+        "group": "35a79c7f1a872629",
+        "order": 6,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "ef8ff59f337a7b68",
+        "type": "ui_spacer",
+        "z": "7ab06ad3559c0b91",
+        "name": "spacer",
+        "group": "35a79c7f1a872629",
+        "order": 7,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "0fbc35994eb3ed52",
+        "type": "ui_spacer",
+        "z": "7ab06ad3559c0b91",
+        "name": "spacer",
+        "group": "35a79c7f1a872629",
+        "order": 8,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "4424c29c2aa5e2ed",
+        "type": "ui_spacer",
+        "z": "7ab06ad3559c0b91",
+        "name": "spacer",
+        "group": "ed6fb1914b666158",
+        "order": 5,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "e9478d1b03ef40b5",
+        "type": "ui_spacer",
+        "z": "7ab06ad3559c0b91",
+        "name": "spacer",
+        "group": "ed6fb1914b666158",
+        "order": 8,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "35a79c7f1a872629",
+        "type": "ui_group",
+        "name": "Atmospheric Dust Level ",
+        "tab": "2366d77bf114f77f",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3a135a3a22d38407",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "https://test.mosquitto.org/",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ed6fb1914b666158",
+        "type": "ui_group",
+        "name": "Panel Dust Level",
+        "tab": "2366d77bf114f77f",
+        "order": 2,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9916bb3f941e7ac5",
+        "type": "ui_group",
+        "name": "Device enabled/disabled",
+        "tab": "2366d77bf114f77f",
+        "order": 3,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2366d77bf114f77f",
+        "type": "ui_tab",
+        "name": "Dust level device",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
